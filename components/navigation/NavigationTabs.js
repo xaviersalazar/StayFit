@@ -6,8 +6,8 @@ import {
   BottomNavigationTab,
   Icon,
   Layout,
-  Text,
 } from "@ui-kitten/components";
+import { PRIMARY_COLOR_HEX, PRIMARY_COLOR_RGBA_04 } from "../../constants";
 import styled from "styled-components";
 
 const Container = styled(Layout)`
@@ -26,14 +26,14 @@ const StyledBottomNavigationTab = styled(BottomNavigationTab)`
   border-radius: 50px;
   box-shadow: ${(props) =>
     props.isSelected
-      ? "0 2px 5px rgba(251, 60, 81, 0.4)"
+      ? "0 2px 5px " + PRIMARY_COLOR_RGBA_04
       : "0 0 0 rgba(0, 0, 0, 0)"};
-  background: ${(props) => (props.isSelected ? "#fb3c51" : "#ffffff")};
+  background: ${(props) => (props.isSelected ? PRIMARY_COLOR_HEX : "#ffffff")};
   margin: 0px 32px;
 `;
 
 const StyledIcon = styled(Icon)`
-  color: ${(props) => (props.isSelected ? "#ffffff" : "#fb3c51")};
+  color: ${(props) => (props.isSelected ? "#ffffff" : PRIMARY_COLOR_HEX)};
   font-size: 16px;
 `;
 

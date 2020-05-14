@@ -1,12 +1,11 @@
 import React from "react";
-import { Layout, Text } from "@ui-kitten/components";
+import { Container } from "../common/Container";
+import { Title } from "../common/Title";
 
 export const Dashboard = () => {
   return (
-    <Layout>
-      <Text category="h1" style={{ position: "absolute", top: 64, left: 64 }}>
-        Dashboard
-      </Text>
-    </Layout>
+    <Container>
+      <Title category="h1">Progress</Title>
+    </Container>
   );
 };
