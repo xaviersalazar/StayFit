@@ -8,32 +8,29 @@ import {
   ApplicationProvider,
   IconRegistry,
   Layout,
-  Text,
 } from "@ui-kitten/components";
 import { default as theme } from "./custom-theme.json";
-import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { FeatherIconsPack } from "./feather-icons";
+import { NavigationView } from "./components/navigation/NavigationView";
 import styled from "styled-components";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Container = styled(Layout)`
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
   background: #fff;
   height: 100%;
   width: 100%;
 `;
 
-const HomeScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">HOME</Text>
-  </Layout>
-);
-
 export default () => (
   <Provider store={store}>
-    <IconRegistry icons={EvaIconsPack} />
+    <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
       <Container>
-        <HomeScreen />
+        <NavigationView />
       </Container>
     </ApplicationProvider>
   </Provider>
