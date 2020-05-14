@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const StyledText = styled(Text)`
   font-size: 48px;
+  margin-bottom: 16px;
 `;
 
 export const Title = ({ ...props }) => {
