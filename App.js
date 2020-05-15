@@ -20,7 +20,7 @@ const Container = styled(Layout)`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  background: #fff;
+  background: #f7f9fc;
   height: 100%;
   width: 100%;
 `;
@@ -29,7 +29,7 @@ export default () => (
   <Provider store={store}>
     <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-      <Container>
+      <Container level="3">
         <NavigationView />
       </Container>
     </ApplicationProvider>

@@ -12,14 +12,19 @@ import styled from "styled-components";
 
 const Container = styled(Layout)`
   position: absolute;
-  bottom: 16px;
+  bottom: 0;
   margin: 0;
-  padding: 0;
+  padding: 8px 0;
   width: 100%;
+  background-color: #ffffff;
+  margin: 0 auto
+  border-radius: 50px;
+  box-shadow: 0 8px 18px #dae0eb;
 `;
 
 const StyledBottomNavigation = styled(BottomNavigation)`
   margin-vertical: 8px;
+  background-color: transparent;
 `;
 
 const StyledBottomNavigationTab = styled(BottomNavigationTab)`
