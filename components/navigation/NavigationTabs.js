@@ -19,7 +19,6 @@ const Container = styled(Layout)`
   background-color: #ffffff;
   margin: 0 auto
   border-radius: 50px;
-  box-shadow: 0 8px 18px #dae0eb;
 `;
 
 const StyledBottomNavigation = styled(BottomNavigation)`

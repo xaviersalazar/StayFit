@@ -15,7 +15,7 @@ const StyledLayout = styled(Layout)`
   border-radius: 10px;
   border: 0;
   box-shadow: 0 26px 26px #c9cfda;
-  margin: 32px 0;
+  margin: 0 0 48px 0;
 `;
 
 const ChartTitle = styled(UiKittenText)`
