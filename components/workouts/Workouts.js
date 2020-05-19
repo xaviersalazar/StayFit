@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { Container } from "../common/Container";
 import { Title } from "../common/Title";
+import { Subtitle } from "../common/Subtitle";
 import { WorkoutContainer } from "../common/WorkoutContainer";
 import { Text } from "@ui-kitten/components";
 import styled from "styled-components";
@@ -18,6 +19,9 @@ export const Workouts = () => {
     <ScrollView style={{ backgroundColor: "transparent" }}>
       <Container style={{ paddingBottom: 100 }}>
         <Title category="h1">Workouts</Title>
+        <Subtitle category="c1" appearance="hint">
+          5/3/1
+        </Subtitle>
         <WorkoutContainer image={require("../../assets/day1.jpg")}>
           <WorkoutTitle category="h1">DAY 1</WorkoutTitle>
         </WorkoutContainer>

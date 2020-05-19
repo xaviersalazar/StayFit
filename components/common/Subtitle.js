@@ -3,9 +3,10 @@ import { Text } from "@ui-kitten/components";
 import styled from "styled-components";
 
 const StyledText = styled(Text)`
-  font-size: 48px;
+  font-size: 18px;
+  margin-bottom: 48px;
 `;
 
-export const Title = ({ ...props }) => {
+export const Subtitle = ({ ...props }) => {
   return <StyledText {...props}>{props.children}</StyledText>;
 };
