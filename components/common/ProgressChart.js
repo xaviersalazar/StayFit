@@ -7,7 +7,6 @@ import {
   PRIMARY_COLOR_RGB,
   PRIMARY_COLOR_RGBA_02,
   TEXT_COLOR_HEX,
-  BACKGROUND_COLOR_HEX,
 } from "../../constants";
 import styled from "styled-components";
 
@@ -15,7 +14,7 @@ const StyledLayout = styled(Layout)`
   height: 225px;
   border-radius: 10px;
   border: 0;
-  box-shadow: 0 8px 18px ${BACKGROUND_COLOR_HEX};
+  box-shadow: 0 26px 26px #c9cfda;
   margin: 32px 0;
 `;
 

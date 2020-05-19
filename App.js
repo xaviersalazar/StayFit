@@ -12,6 +12,7 @@ import {
 import { default as theme } from "./custom-theme.json";
 import { FeatherIconsPack } from "./feather-icons";
 import { NavigationView } from "./components/navigation/NavigationView";
+import { BACKGROUND_COLOR_HEX } from "./constants";
 import styled from "styled-components";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -20,16 +21,16 @@ const Container = styled(Layout)`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  background: #f7f9fc;
   height: 100%;
   width: 100%;
+  background: ${BACKGROUND_COLOR_HEX};
 `;
 
 export default () => (
   <Provider store={store}>
     <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-      <Container level="3">
+      <Container level="2">
         <NavigationView />
       </Container>
     </ApplicationProvider>
