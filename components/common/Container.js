@@ -4,7 +4,7 @@ import { BACKGROUND_COLOR_HEX } from "../../constants";
 import styled from "styled-components";
 
 const StyledContainer = styled(Layout)`
-  height: 90%;
+  height: 100%;
   padding: 64px 16px 0 16px;
   background: ${BACKGROUND_COLOR_HEX};
 `;

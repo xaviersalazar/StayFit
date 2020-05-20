@@ -25,7 +25,7 @@ const WorkoutSubtitle = styled(Text)`
 export const Workouts = () => {
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
-      <Container style={{ paddingBottom: 100 }}>
+      <Container style={{ paddingBottom: 80 }}>
         <Title category="h1">Workouts</Title>
         <Subtitle category="c1" appearance="hint">
           5/3/1

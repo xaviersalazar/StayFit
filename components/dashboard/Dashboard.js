@@ -9,7 +9,7 @@ import { ProgressChart } from "../common/ProgressChart";
 export const Dashboard = () => {
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
-      <Container style={{ paddingBottom: 100 }}>
+      <Container style={{ paddingBottom: 80 }}>
         <Title category="h1">Progress</Title>
         <Subtitle category="c1" appearance="hint">
           Last 7 1RM+
