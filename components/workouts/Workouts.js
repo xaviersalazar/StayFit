@@ -3,24 +3,55 @@ import { ScrollView } from "react-native";
 import { Container } from "../common/Container";
 import { Title } from "../common/Title";
 import { Subtitle } from "../common/Subtitle";
-import { WorkoutContainer } from "../common/WorkoutContainer";
-import { Text } from "@ui-kitten/components";
-import styled from "styled-components";
+import { Workout } from "../common/Workout";
 
-const WorkoutTitle = styled(Text)`
-  position: absolute;
-  bottom: 80px;
-  left: 16px;
-  color: #ffffff;
-`;
-
-const WorkoutSubtitle = styled(Text)`
-  position: absolute;
-  bottom: ${(props) =>
-    props.order === "1" ? "64px" : props.order === "2" ? "48px" : "32px"};
-  left: 18px;
-  color: rgba(255, 255, 255, 0.8);
-`;
+const data = [
+  {
+    image: require("../../assets/day1.jpg"),
+    workoutTitle: "DAY 1",
+    workoutSubtitle: {
+      first: "Light Bench Press",
+      second: "Light Overhead Press",
+      third: "Assistance",
+    },
+  },
+  {
+    image: require("../../assets/day2.jpg"),
+    workoutTitle: "DAY 2",
+    workoutSubtitle: {
+      first: "Squat",
+      second: "Sumo Deadlift",
+      third: "Assistance",
+    },
+  },
+  {
+    image: require("../../assets/day3.jpg"),
+    workoutTitle: "DAY 3",
+    workoutSubtitle: {
+      first: "Overhead Press",
+      second: "Incline Bench Press",
+      third: "Assistance",
+    },
+  },
+  {
+    image: require("../../assets/day4.jpg"),
+    workoutTitle: "DAY 4",
+    workoutSubtitle: {
+      first: "Deadlift",
+      second: "Front Squat",
+      third: "Assistance",
+    },
+  },
+  {
+    image: require("../../assets/day5.jpg"),
+    workoutTitle: "DAY 5",
+    workoutSubtitle: {
+      first: "Bench Press",
+      second: "Close Grip Bench Press",
+      third: "Assistance",
+    },
+  },
+];
 
 export const Workouts = () => {
   return (
@@ -30,66 +61,18 @@ export const Workouts = () => {
         <Subtitle category="c1" appearance="hint">
           5/3/1
         </Subtitle>
-        <WorkoutContainer image={require("../../assets/day1.jpg")}>
-          <WorkoutTitle category="h1">DAY 1</WorkoutTitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="1">
-            Light Bench Press
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="2">
-            Light Overhead Press
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            Assistance
-          </WorkoutSubtitle>
-        </WorkoutContainer>
-        <WorkoutContainer image={require("../../assets/day2.jpg")}>
-          <WorkoutTitle category="h1">DAY 2</WorkoutTitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="1">
-            Squat
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="2">
-            Sumo Deadlift
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            Assistance
-          </WorkoutSubtitle>
-        </WorkoutContainer>
-        <WorkoutContainer image={require("../../assets/day3.jpg")}>
-          <WorkoutTitle category="h1">DAY 3</WorkoutTitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="1">
-            Overhead Press
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="2">
-            Incline Bench
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            Assistance
-          </WorkoutSubtitle>
-        </WorkoutContainer>
-        <WorkoutContainer image={require("../../assets/day4.jpg")}>
-          <WorkoutTitle category="h1">DAY 4</WorkoutTitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="1">
-            Deadlift
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="2">
-            Front Squat
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            Assistance
-          </WorkoutSubtitle>
-        </WorkoutContainer>
-        <WorkoutContainer image={require("../../assets/day5.jpg")}>
-          <WorkoutTitle category="h1">DAY 5</WorkoutTitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="1">
-            Bench Press
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="2">
-            Close Grip Bench Press
-          </WorkoutSubtitle>
-          <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            Assistance
-          </WorkoutSubtitle>
-        </WorkoutContainer>
+        {data.map((d) => (
+          <Workout
+            key={d.workoutTitle}
+            image={d.image}
+            workoutTitle={d.workoutTitle}
+            workoutSubtitle={{
+              first: d.workoutSubtitle.first,
+              second: d.workoutSubtitle.second,
+              third: d.workoutSubtitle.third,
+            }}
+          />
+        ))}
       </Container>
     </ScrollView>
   );
