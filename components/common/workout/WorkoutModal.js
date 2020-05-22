@@ -25,7 +25,7 @@ const TopContainer = styled(Layout)`
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
   padding: 64px 16px 0 16px;
-  margin-bottom: 16px;
+  margin-bottom: 48px;
 `;
 
 const WorkoutsTabsContainer = styled(Layout)`
@@ -66,6 +66,11 @@ const SaveButtonContainer = styled(Layout)`
 const SaveButton = styled(Button)`
   width: 80%;
   border-radius: 50px;
+`;
+
+const WorkoutSetsContainer = styled(Layout)`
+  height: 55%;
+  background: ${BACKGROUND_COLOR_HEX};
 `;
 
 export const WorkoutModal = ({
@@ -173,6 +178,7 @@ export const WorkoutModal = ({
             </WorkoutTabs>
           </WorkoutsTabsContainer>
         </TopContainer>
+        <WorkoutSetsContainer></WorkoutSetsContainer>
         <SaveButtonContainer>
           <SaveButton size="giant" onPress={() => setIsVisible(false)}>
             Save

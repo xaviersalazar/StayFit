@@ -2,28 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Layout, Text as UiKittenText } from "@ui-kitten/components";
 import { AreaChart } from "react-native-svg-charts";
 import * as shape from "d3-shape";
-import { Path, Circle, G, Text } from "react-native-svg";
 import {
+  Path,
+  Circle,
+  G,
+  Text,
+  Defs,
+  LinearGradient,
+  Rect,
+  Stop,
+} from "react-native-svg";
+import {
+  PRIMARY_COLOR_HEX,
   PRIMARY_COLOR_RGB,
   PRIMARY_COLOR_RGBA_02,
   TEXT_COLOR_HEX,
+  BACKGROUND_COLOR_HEX,
 } from "../../constants";
 import styled from "styled-components";
 
 const StyledLayout = styled(Layout)`
   height: 225px;
+  background: #ffffff;
   border-radius: 10px;
   border: 0;
-  box-shadow: 0 28px 8px #c9cfda;
+  box-shadow: 0 28px 12px #c9cfda;
   margin: 0 0 64px 0;
 `;
 
 const ChartTitle = styled(UiKittenText)`
   padding: 16px;
+  color: ${TEXT_COLOR_HEX};
 `;
 
 const ChartContainer = styled(Layout)`
   height: 200px
+  background: #fff;
   overflow: hidden;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -44,6 +58,20 @@ export const ProgressChart = ({ chartTitle, emptyData, data }) => {
 
   const Line = ({ line }) => (
     <Path key={"line"} d={line} stroke={PRIMARY_COLOR_RGB} fill={"none"} />
+  );
+
+  const Gradient = () => (
+    <Defs key={"defs"}>
+      <LinearGradient id={"gradient"} x1={"0%"} y={"0%"} x2={"0%"} y2={"100%"}>
+        <Stop offset={"0%"} stopColor={"rgb(251, 60, 81)"} stopOpacity={0.2} />
+        <Stop offset={"60%"} stopColor={"rgb(251, 60, 81)"} stopOpacity={0.1} />
+        <Stop
+          offset={"100%"}
+          stopColor={"rgb(251, 60, 81)"}
+          stopOpacity={0.06}
+        />
+      </LinearGradient>
+    </Defs>
   );
 
   const ChartPoints = ({ x, y }) => {
@@ -94,13 +122,14 @@ export const ProgressChart = ({ chartTitle, emptyData, data }) => {
           xAccessor={({ item }) => item.week}
           contentInset={{ top: 70, bottom: 0 }}
           curve={shape.curveNatural}
-          svg={{ fill: PRIMARY_COLOR_RGBA_02 }}
+          svg={{ fill: "url(#gradient)" }}
           showGrid={false}
           xMin={1 - 0.5}
           xMax={7 + 0.5}
           animate={true}
-          animationDuration={500}
+          animationDuration={300}
         >
+          <Gradient />
           <Line />
           <ChartPoints />
           <ChartTooltips />
