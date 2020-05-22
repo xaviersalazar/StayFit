@@ -10,8 +10,8 @@ const data = [
     image: require("../../assets/day1.jpg"),
     workoutTitle: "DAY 1",
     workoutSubtitle: {
-      first: "Light Bench Press",
-      second: "Light Overhead Press",
+      first: "Bench Press",
+      second: "Overhead Press",
       third: "Assistance",
     },
   },

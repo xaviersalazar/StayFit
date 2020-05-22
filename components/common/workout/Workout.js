@@ -43,6 +43,7 @@ export const Workout = ({ image, workoutTitle, workoutSubtitle }) => {
         isVisible={isVisible}
         setIsVisible={setIsVisible}
         workoutTitle={workoutTitle}
+        workoutSubtitle={workoutSubtitle}
       />
     </>
   );

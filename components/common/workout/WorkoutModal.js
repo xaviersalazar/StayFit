@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-native-modal";
 import {
   BACKGROUND_COLOR_HEX,
@@ -6,9 +6,7 @@ import {
 } from "../../../constants";
 import { Title } from "../Title";
 import { Subtitle } from "../Subtitle";
-import { Row } from "../Row";
-import { Column } from "../Column";
-import { Layout, Button, Text, Icon } from "@ui-kitten/components";
+import { Layout, Button, Tab, TabBar } from "@ui-kitten/components";
 import styled from "styled-components";
 
 const WorkoutModalLayout = styled(Layout)`
@@ -24,7 +22,13 @@ const TopContainer = styled(Layout)`
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
   padding: 64px 16px;
-  margin-bottom: 48px;
+  margin-bottom: 16px;
+`;
+
+const WorkoutsTabsContainer = styled(Layout)`
+  height: 100%;
+  background: ${BACKGROUND_COLOR_HEX};
+  padding: 0 16px;
 `;
 
 const SaveButtonContainer = styled(Layout)`
@@ -41,7 +45,14 @@ const SaveButton = styled(Button)`
   border-radius: 8px;
 `;
 
-export const WorkoutModal = ({ isVisible, setIsVisible, workoutTitle }) => {
+export const WorkoutModal = ({
+  isVisible,
+  setIsVisible,
+  workoutTitle,
+  workoutSubtitle,
+}) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <Modal
       isVisible={isVisible}
@@ -60,6 +71,16 @@ export const WorkoutModal = ({ isVisible, setIsVisible, workoutTitle }) => {
             5/3/1 - {workoutTitle}
           </Subtitle>
         </TopContainer>
+        <WorkoutsTabsContainer>
+          <TabBar
+            selectedIndex={selectedIndex}
+            onSelect={(index) => setSelectedIndex(index)}
+            style={{ backgroundColor: BACKGROUND_COLOR_HEX }}
+          >
+            <Tab title={workoutSubtitle.first} />
+            <Tab title={workoutSubtitle.second} />
+          </TabBar>
+        </WorkoutsTabsContainer>
         <SaveButtonContainer>
           <SaveButton size="giant" onPress={() => setIsVisible(false)}>
             Save
