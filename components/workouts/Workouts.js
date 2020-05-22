@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import { Container } from "../common/Container";
 import { Title } from "../common/Title";
 import { Subtitle } from "../common/Subtitle";
-import { Workout } from "../common/Workout";
+import { Workout } from "../common/workout/Workout";
 
 const data = [
   {
