@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-native-modal";
 import {
   BACKGROUND_COLOR_HEX,
-  WORKOUT_MODAL_BACKGROUND_COLOR_HEX,
   TEXT_COLOR_HINT_HEX,
   PRIMARY_COLOR_HEX,
 } from "../../../constants";
@@ -20,7 +19,8 @@ const WorkoutModalLayout = styled(Layout)`
 `;
 
 const TopContainer = styled(Layout)`
-  background: ${WORKOUT_MODAL_BACKGROUND_COLOR_HEX};
+  background: #ffffff;
+  box-shadow: 0 18px 12px #c9cfda;
   height: 30%;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
@@ -44,9 +44,7 @@ const WorkoutTabs = styled(TabBar)`
 
 const WorkoutTab = styled(Tab)`
   background: ${(props) =>
-    props.isSelected
-      ? WORKOUT_MODAL_BACKGROUND_COLOR_HEX
-      : BACKGROUND_COLOR_HEX};
+    props.isSelected ? PRIMARY_COLOR_HEX : BACKGROUND_COLOR_HEX};
   border-radius: 35px;
   padding: 8px;
   margin: 0 4px;
@@ -67,7 +65,7 @@ const SaveButtonContainer = styled(Layout)`
 
 const SaveButton = styled(Button)`
   width: 80%;
-  border-radius: 8px;
+  border-radius: 50px;
 `;
 
 export const WorkoutModal = ({
@@ -138,9 +136,7 @@ export const WorkoutModal = ({
     >
       <WorkoutModalLayout>
         <TopContainer>
-          <Title category="h1" inverted={true}>
-            DAY 1
-          </Title>
+          <Title category="h1">{workoutTitle}</Title>
           {renderWorkoutsIncluded(
             workoutSubtitle.first,
             workoutSubtitle.second,
