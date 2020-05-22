@@ -12,7 +12,7 @@ const data = [
     workoutSubtitle: {
       first: "Bench Press",
       second: "Overhead Press",
-      third: "Assistance",
+      assistance: ["Chest", "Arms", "Back"],
     },
   },
   {
@@ -21,7 +21,7 @@ const data = [
     workoutSubtitle: {
       first: "Squat",
       second: "Sumo Deadlift",
-      third: "Assistance",
+      assistance: ["Legs", "Abs"],
     },
   },
   {
@@ -30,7 +30,7 @@ const data = [
     workoutSubtitle: {
       first: "Overhead Press",
       second: "Incline Bench Press",
-      third: "Assistance",
+      assistance: ["Shoulders", "Chest"],
     },
   },
   {
@@ -39,7 +39,7 @@ const data = [
     workoutSubtitle: {
       first: "Deadlift",
       second: "Front Squat",
-      third: "Assistance",
+      assistance: ["Back", "Abs"],
     },
   },
   {
@@ -48,7 +48,7 @@ const data = [
     workoutSubtitle: {
       first: "Bench Press",
       second: "Close Grip Bench Press",
-      third: "Assistance",
+      assistance: ["Arms", "Other"],
     },
   },
 ];
@@ -69,7 +69,7 @@ export const Workouts = () => {
             workoutSubtitle={{
               first: d.workoutSubtitle.first,
               second: d.workoutSubtitle.second,
-              third: d.workoutSubtitle.third,
+              assistance: d.workoutSubtitle.assistance,
             }}
           />
         ))}

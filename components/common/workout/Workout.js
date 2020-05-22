@@ -35,7 +35,7 @@ export const Workout = ({ image, workoutTitle, workoutSubtitle }) => {
             {workoutSubtitle.second}
           </WorkoutSubtitle>
           <WorkoutSubtitle category="c1" appearance="hint" order="3">
-            {workoutSubtitle.third}
+            Assistance
           </WorkoutSubtitle>
         </WorkoutContainer>
       </TouchableOpacity>
