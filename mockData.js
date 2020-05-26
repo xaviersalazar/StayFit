@@ -56,6 +56,53 @@ export const data = {
       type: null,
     },
   ],
+  setData: [
+    {
+      set: "SET 1",
+      lbs: "165",
+      reps: "8",
+    },
+    {
+      set: "SET 2",
+      lbs: "190",
+      reps: "6",
+    },
+    {
+      set: "SET 3",
+      lbs: "215",
+      reps: "4",
+    },
+    {
+      set: "SET 4",
+      lbs: "215",
+      reps: "4",
+    },
+    {
+      set: "SET 5",
+      lbs: "215",
+      reps: "4",
+    },
+    {
+      set: "SET 6",
+      lbs: "200",
+      reps: "5",
+    },
+    {
+      set: "SET 7",
+      lbs: "190",
+      reps: "6",
+    },
+    {
+      set: "SET 8",
+      lbs: "175",
+      reps: "7",
+    },
+    {
+      set: "SET 9",
+      lbs: "165+",
+      reps: "8",
+    },
+  ],
   benchPress: [
     {
       id: 0,

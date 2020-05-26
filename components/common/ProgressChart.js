@@ -9,16 +9,9 @@ import {
   Text,
   Defs,
   LinearGradient,
-  Rect,
   Stop,
 } from "react-native-svg";
-import {
-  PRIMARY_COLOR_HEX,
-  PRIMARY_COLOR_RGB,
-  PRIMARY_COLOR_RGBA_02,
-  TEXT_COLOR_HEX,
-  BACKGROUND_COLOR_HEX,
-} from "../../constants";
+import { PRIMARY_COLOR_RGB, TEXT_COLOR_HEX } from "../../constants";
 import styled from "styled-components";
 
 const StyledLayout = styled(Layout)`

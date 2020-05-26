@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import {
   BACKGROUND_COLOR_HEX,
@@ -10,6 +11,8 @@ import { Row } from "../Row";
 import { Column } from "../Column";
 import { Layout, Button, Tab, TabBar, Text, Icon } from "@ui-kitten/components";
 import styled from "styled-components";
+import { data } from "../../../mockData";
+import { WorkoutSets } from "./WorkoutSets";
 
 const WorkoutModalLayout = styled(Layout)`
   margin: 0;
@@ -25,7 +28,8 @@ const TopContainer = styled(Layout)`
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
   padding: 64px 16px 0 16px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
+  z-index: 99;
 `;
 
 const WorkoutsTabsContainer = styled(Layout)`
@@ -56,21 +60,27 @@ const WorkoutTabText = styled(Text)`
 
 const SaveButtonContainer = styled(Layout)`
   position: absolute;
-  bottom: 48px;
+  bottom: 0;
   justify-content: center;
   align-items: center;
   width: 100%;
   background: ${BACKGROUND_COLOR_HEX};
+  height: 75px;
 `;
 
 const SaveButton = styled(Button)`
+  position: relative;
+  bottom: 22px;
   width: 80%;
   border-radius: 50px;
 `;
 
 const WorkoutSetsContainer = styled(Layout)`
-  height: 55%;
+  height: 65%;
+  overflow: hidden;
   background: ${BACKGROUND_COLOR_HEX};
+  padding-bottom: 74px;
+  padding-right: 4px;
 `;
 
 export const WorkoutModal = ({
@@ -178,7 +188,13 @@ export const WorkoutModal = ({
             </WorkoutTabs>
           </WorkoutsTabsContainer>
         </TopContainer>
-        <WorkoutSetsContainer></WorkoutSetsContainer>
+        <WorkoutSetsContainer>
+          <ScrollView style={{ backgroundColor: "transparent" }}>
+            {data.setData.map((set) => {
+              return <WorkoutSets key={set.set} set={set} />;
+            })}
+          </ScrollView>
+        </WorkoutSetsContainer>
         <SaveButtonContainer>
           <SaveButton size="giant" onPress={() => setIsVisible(false)}>
             Save
