@@ -14,6 +14,10 @@ import styled from "styled-components";
 import { data } from "../../../mockData";
 import { WorkoutSets } from "./WorkoutSets";
 
+const ExitIcon = (props) => (
+  <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="x" />
+);
+
 const WorkoutModalLayout = styled(Layout)`
   margin: 0;
   width: 100%;
@@ -30,6 +34,17 @@ const TopContainer = styled(Layout)`
   padding: 64px 16px 0 16px;
   margin-bottom: 32px;
   z-index: 99;
+`;
+
+const ExitButton = styled(Button)`
+  position: absolute;
+  top: 64px;
+  right: 28px;
+  height: 45px;
+  width: 45px;
+  border-radius: 15px;
+  background: ${BACKGROUND_COLOR_HEX};
+  z-index: 100;
 `;
 
 const WorkoutsTabsContainer = styled(Layout)`
@@ -58,7 +73,7 @@ const WorkoutTabText = styled(Text)`
   color: ${(props) => (props.isSelected ? "#ffffff" : TEXT_COLOR_HINT_HEX)};
 `;
 
-const SaveButtonContainer = styled(Layout)`
+const StartButtonContainer = styled(Layout)`
   position: absolute;
   bottom: 0;
   justify-content: center;
@@ -68,7 +83,7 @@ const SaveButtonContainer = styled(Layout)`
   height: 75px;
 `;
 
-const SaveButton = styled(Button)`
+const StartButton = styled(Button)`
   position: relative;
   bottom: 22px;
   width: 80%;
@@ -151,6 +166,11 @@ export const WorkoutModal = ({
     >
       <WorkoutModalLayout>
         <TopContainer>
+          <ExitButton
+            appearance="ghost"
+            accessoryLeft={ExitIcon}
+            onPress={() => setIsVisible(false)}
+          />
           <Title category="h1">{workoutTitle}</Title>
           {renderWorkoutsIncluded(
             workoutSubtitle.first,
@@ -195,11 +215,11 @@ export const WorkoutModal = ({
             })}
           </ScrollView>
         </WorkoutSetsContainer>
-        <SaveButtonContainer>
-          <SaveButton size="giant" onPress={() => setIsVisible(false)}>
-            Save
-          </SaveButton>
-        </SaveButtonContainer>
+        <StartButtonContainer>
+          <StartButton size="giant" onPress={() => setIsVisible(false)}>
+            Start
+          </StartButton>
+        </StartButtonContainer>
       </WorkoutModalLayout>
     </Modal>
   );
