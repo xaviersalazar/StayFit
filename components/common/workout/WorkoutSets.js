@@ -6,7 +6,7 @@ import { TEXT_COLOR_HINT_HEX } from "../../../constants";
 import styled from "styled-components";
 
 const SetRow = styled(Row)`
-  margin: 16px 0;
+  margin: 8px 0;
 `;
 
 export const WorkoutSets = ({ set }) => {

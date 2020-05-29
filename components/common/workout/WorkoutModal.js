@@ -10,9 +10,10 @@ import { Title } from "../Title";
 import { Row } from "../Row";
 import { Column } from "../Column";
 import { Layout, Button, Tab, TabBar, Text, Icon } from "@ui-kitten/components";
-import styled from "styled-components";
 import { data } from "../../../mockData";
 import { WorkoutSets } from "./WorkoutSets";
+import { CurrentWorkout } from "./CurrentWorkout";
+import styled from "styled-components";
 
 const ExitIcon = (props) => (
   <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="x" />
@@ -105,6 +106,7 @@ export const WorkoutModal = ({
   workoutSubtitle,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isCurrentWorkoutVisible, setIsCurrentWorkoutVisible] = useState(false);
 
   const renderWorkoutsIncluded = (workout1, workout2, assistance) => {
     return (
@@ -216,11 +218,18 @@ export const WorkoutModal = ({
           </ScrollView>
         </WorkoutSetsContainer>
         <StartButtonContainer>
-          <StartButton size="giant" onPress={() => setIsVisible(false)}>
+          <StartButton
+            size="giant"
+            onPress={() => setIsCurrentWorkoutVisible(true)}
+          >
             Start
           </StartButton>
         </StartButtonContainer>
       </WorkoutModalLayout>
+      <CurrentWorkout
+        isVisible={isCurrentWorkoutVisible}
+        setIsVisible={setIsCurrentWorkoutVisible}
+      />
     </Modal>
   );
 };
