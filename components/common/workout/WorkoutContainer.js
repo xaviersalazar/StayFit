@@ -7,7 +7,7 @@ const StyledLayout = styled(Layout)`
   height: 250px;
   border-radius: 20px;
   border: 0;
-  box-shadow: 0 10px 12px rgba(45, 52, 54, 0.8);
+  box-shadow: 0 10px 12px rgba(45, 52, 54, 0.7);
   margin: 0 0 48px 0;
 `;
 

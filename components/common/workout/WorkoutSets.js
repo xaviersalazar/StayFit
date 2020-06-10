@@ -6,7 +6,7 @@ import { TEXT_COLOR_HINT_HEX } from "../../../constants";
 import styled from "styled-components";
 
 const SetRow = styled(Row)`
-  margin: 2.5px 0;
+  margin: 4px 0;
 `;
 
 export const WorkoutSets = ({ set }) => {
@@ -22,7 +22,7 @@ export const WorkoutSets = ({ set }) => {
         </Text>
       </Column>
       <Column col={2}>
-        <Text category="h2" style={{ textAlign: "center" }}>
+        <Text category="h4" style={{ textAlign: "center" }}>
           {set.lbs}
         </Text>
         <Text category="c1" appearance="hint" style={{ textAlign: "center" }}>
@@ -42,7 +42,7 @@ export const WorkoutSets = ({ set }) => {
         />
       </Column>
       <Column col={2}>
-        <Text category="h2" style={{ textAlign: "center", marginRight: 32 }}>
+        <Text category="h4" style={{ textAlign: "center", marginRight: 32 }}>
           {set.reps}
         </Text>
         <Text

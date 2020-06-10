@@ -16,8 +16,12 @@ import { WorkoutSets } from "./WorkoutSets";
 import { CurrentWorkout } from "./CurrentWorkout";
 import styled from "styled-components";
 
-const ExitIcon = (props) => (
-  <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="x" />
+const BackIcon = (props) => (
+  <Icon
+    {...props}
+    style={{ color: "#8f9bb3", fontSize: 18 }}
+    name="arrow-left"
+  />
 );
 
 const WorkoutModalLayout = styled(Layout)`
@@ -38,14 +42,20 @@ const TopContainer = styled(Layout)`
   z-index: 99;
 `;
 
-const WorkoutsText = styled(Text)`
-  color: #fff;
+const WorkoutTitle = styled(Title)`
+  text-align: center;
+  margin-top: 12px;
 `;
 
-const ExitButton = styled(Button)`
+const WorkoutsText = styled(Text)`
+  color: #ffffff;
+  text-align: center;
+`;
+
+const BackButton = styled(Button)`
   position: absolute;
-  top: 64px;
-  right: 28px;
+  top: 48px;
+  left: 18px;
   height: 45px;
   width: 45px;
   border-radius: 15px;
@@ -55,7 +65,7 @@ const ExitButton = styled(Button)`
 
 const WorkoutsTabsContainer = styled(Layout)`
   position: relative;
-  top: 32px;
+  top: 18px;
   background: ${BACKGROUND_COLOR_HEX};
   border-radius: 35px;
   padding: 4px;
@@ -101,7 +111,7 @@ const WorkoutSetsContainer = styled(Layout)`
   overflow: hidden;
   background: ${BACKGROUND_COLOR_HEX};
   padding-right: 4px;
-  padding-top: 16px;
+  padding-top: 36px;
 `;
 
 export const WorkoutModal = ({
@@ -117,35 +127,17 @@ export const WorkoutModal = ({
     return (
       <React.Fragment>
         <Row>
-          <Column col={1}>
-            <Icon
-              name="package"
-              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
-            />
-          </Column>
-          <Column col={20}>
+          <Column>
             <WorkoutsText category="c1">{workout1} x9</WorkoutsText>
           </Column>
         </Row>
         <Row>
-          <Column col={1}>
-            <Icon
-              name="package"
-              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
-            />
-          </Column>
-          <Column col={20}>
+          <Column>
             <WorkoutsText category="c1">{workout2} x8</WorkoutsText>
           </Column>
         </Row>
         <Row>
-          <Column col={1}>
-            <Icon
-              name="package"
-              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
-            />
-          </Column>
-          <Column col={20}>
+          <Column>
             <WorkoutsText category="c1">
               Assistance:{" "}
               {assistance.map((a, i) =>
@@ -169,14 +161,14 @@ export const WorkoutModal = ({
     >
       <WorkoutModalLayout>
         <TopContainer>
-          <ExitButton
+          <BackButton
             appearance="ghost"
-            accessoryLeft={ExitIcon}
+            accessoryLeft={BackIcon}
             onPress={() => setIsVisible(false)}
           />
-          <Title category="h1" inverted={true}>
+          <WorkoutTitle category="h1" inverted={true}>
             {workoutTitle}
-          </Title>
+          </WorkoutTitle>
           {renderWorkoutsIncluded(
             workoutSubtitle.first,
             workoutSubtitle.second,
