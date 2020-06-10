@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import {
+  PRIMARY_COLOR_HEX,
   BACKGROUND_COLOR_HEX,
   TEXT_COLOR_HINT_HEX,
-  PRIMARY_COLOR_HEX,
+  PRIMARY_COLOR_RGBA_06,
 } from "../../../constants";
 import { Title } from "../Title";
 import { Row } from "../Row";
@@ -27,14 +28,18 @@ const WorkoutModalLayout = styled(Layout)`
 `;
 
 const TopContainer = styled(Layout)`
-  background: #ffffff;
-  box-shadow: 0 18px 12px #c9cfda;
+  background: ${PRIMARY_COLOR_HEX};
+  box-shadow: 0 4px 12px ${PRIMARY_COLOR_RGBA_06};
   height: 30%;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
   padding: 64px 16px 0 16px;
-  margin-bottom: 32px;
+  margin-bottom: 0;
   z-index: 99;
+`;
+
+const WorkoutsText = styled(Text)`
+  color: #fff;
 `;
 
 const ExitButton = styled(Button)`
@@ -86,17 +91,17 @@ const StartButtonContainer = styled(Layout)`
 
 const StartButton = styled(Button)`
   position: relative;
-  bottom: 22px;
+  bottom: 12px;
   width: 80%;
   border-radius: 50px;
 `;
 
 const WorkoutSetsContainer = styled(Layout)`
-  height: 65%;
+  height: 70%;
   overflow: hidden;
   background: ${BACKGROUND_COLOR_HEX};
-  padding-bottom: 74px;
   padding-right: 4px;
+  padding-top: 16px;
 `;
 
 export const WorkoutModal = ({
@@ -115,42 +120,38 @@ export const WorkoutModal = ({
           <Column col={1}>
             <Icon
               name="package"
-              style={{ height: 12, marginTop: 1, color: PRIMARY_COLOR_HEX }}
+              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
             />
           </Column>
           <Column col={20}>
-            <Text category="c1" appearance="hint">
-              {workout1} x9
-            </Text>
+            <WorkoutsText category="c1">{workout1} x9</WorkoutsText>
           </Column>
         </Row>
         <Row>
           <Column col={1}>
             <Icon
               name="package"
-              style={{ height: 12, marginTop: 1, color: PRIMARY_COLOR_HEX }}
+              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
             />
           </Column>
           <Column col={20}>
-            <Text category="c1" appearance="hint">
-              {workout2} x8
-            </Text>
+            <WorkoutsText category="c1">{workout2} x8</WorkoutsText>
           </Column>
         </Row>
         <Row>
           <Column col={1}>
             <Icon
               name="package"
-              style={{ height: 12, marginTop: 1, color: PRIMARY_COLOR_HEX }}
+              style={{ height: 12, marginTop: 1, color: "#ffffff" }}
             />
           </Column>
           <Column col={20}>
-            <Text category="c1" appearance="hint">
+            <WorkoutsText category="c1">
               Assistance:{" "}
               {assistance.map((a, i) =>
                 i !== assistance.length - 1 ? `${a}, ` : a
               )}
-            </Text>
+            </WorkoutsText>
           </Column>
         </Row>
       </React.Fragment>
@@ -173,7 +174,9 @@ export const WorkoutModal = ({
             accessoryLeft={ExitIcon}
             onPress={() => setIsVisible(false)}
           />
-          <Title category="h1">{workoutTitle}</Title>
+          <Title category="h1" inverted={true}>
+            {workoutTitle}
+          </Title>
           {renderWorkoutsIncluded(
             workoutSubtitle.first,
             workoutSubtitle.second,
@@ -211,11 +214,9 @@ export const WorkoutModal = ({
           </WorkoutsTabsContainer>
         </TopContainer>
         <WorkoutSetsContainer>
-          <ScrollView style={{ backgroundColor: "transparent" }}>
-            {data.setData.map((set) => {
-              return <WorkoutSets key={set.set} set={set} />;
-            })}
-          </ScrollView>
+          {data.setData.map((set) => {
+            return <WorkoutSets key={set.set} set={set} />;
+          })}
         </WorkoutSetsContainer>
         <StartButtonContainer>
           <StartButton

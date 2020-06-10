@@ -1,132 +1,69 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Layout, Text as UiKittenText } from "@ui-kitten/components";
-import { AreaChart } from "react-native-svg-charts";
-import * as shape from "d3-shape";
 import {
-  Path,
-  Circle,
-  G,
-  Text,
-  Defs,
-  LinearGradient,
-  Stop,
-} from "react-native-svg";
-import { PRIMARY_COLOR_RGB, TEXT_COLOR_HEX } from "../../constants";
+  PRIMARY_COLOR_HEX,
+  PRIMARY_COLOR_RGBA_06,
+  BACKGROUND_COLOR_HEX,
+} from "../../constants";
+import { Svg, G, Line, Rect, Text } from "react-native-svg";
+import * as d3 from "d3";
 import styled from "styled-components";
 
 const StyledLayout = styled(Layout)`
   height: 225px;
-  background: #ffffff;
-  border-radius: 10px;
+  background: ${PRIMARY_COLOR_HEX};
+  border-radius: 20px;
   border: 0;
-  box-shadow: 0 28px 12px #c9cfda;
+  box-shadow: 0 28px 12px ${PRIMARY_COLOR_RGBA_06};
   margin: 0 0 64px 0;
 `;
 
 const ChartTitle = styled(UiKittenText)`
   padding: 16px;
-  color: ${TEXT_COLOR_HEX};
+  color: #ffffff;
 `;
 
 const ChartContainer = styled(Layout)`
   height: 200px
-  background: #fff;
+  background: ${PRIMARY_COLOR_HEX};
   overflow: hidden;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;
 
 export const ProgressChart = ({ chartTitle, emptyData, data }) => {
-  const [chartData, setChartData] = useState(emptyData);
-
-  useEffect(() => {
-    setDataForChart();
-  });
-
-  const setDataForChart = () => {
-    setTimeout(() => {
-      setChartData(data);
-    }, 1000);
-  };
-
-  const Line = ({ line }) => (
-    <Path key={"line"} d={line} stroke={PRIMARY_COLOR_RGB} fill={"none"} />
-  );
-
-  const Gradient = () => (
-    <Defs key={"defs"}>
-      <LinearGradient id={"gradient"} x1={"0%"} y={"0%"} x2={"0%"} y2={"100%"}>
-        <Stop offset={"0%"} stopColor={"rgb(251, 60, 81)"} stopOpacity={0.2} />
-        <Stop offset={"60%"} stopColor={"rgb(251, 60, 81)"} stopOpacity={0.1} />
-        <Stop
-          offset={"100%"}
-          stopColor={"rgb(251, 60, 81)"}
-          stopOpacity={0.06}
-        />
-      </LinearGradient>
-    </Defs>
-  );
-
-  const ChartPoints = ({ x, y }) => {
-    return chartData
-      .filter((item) => item.id !== 0 && item.id !== 8)
-      .map((item, index) => (
-        <Circle
-          key={index}
-          cx={x(item.week)}
-          cy={y(item.weight)}
-          r={4}
-          stroke={PRIMARY_COLOR_RGB}
-          fill={"white"}
-        />
-      ));
-  };
-
-  const ChartTooltips = ({ x, y }) => {
-    return chartData
-      .filter((item) => item.id !== 0 && item.id !== 8)
-      .map((item) => (
-        <G key={item.id} x={x(item.week) - 40} y={y(item.weight)}>
-          <G y={-30} x={4}>
-            <Text
-              x={item.week + 30}
-              dy={10}
-              alignmentBaseline={"middle"}
-              textAnchor={"middle"}
-              stroke={TEXT_COLOR_HEX}
-              fontWeight={"100"}
-              fontSize={"10"}
-            >
-              {`${item.weight} lbs`}
-            </Text>
-          </G>
-        </G>
-      ));
-  };
+  const GRAPH_MARGIN = 20;
+  const GRAPH_BAR_WIDTH = 5;
+  const SVGHeight = 200;
+  const SVGWidth = 410;
+  const graphHeight = SVGHeight - 1.5 * GRAPH_MARGIN;
+  const graphWidth = SVGWidth - 2 * GRAPH_MARGIN;
+  const xDomain = data.map((item) => item.week);
+  const xRange = [0, graphWidth];
+  const x = d3.scalePoint().domain(xDomain).range(xRange).padding(1);
+  const yDomain = [0, d3.max(data, (d) => d.weight)];
+  const yRange = [0, graphHeight];
+  const y = d3.scaleLinear().domain(yDomain).range(yRange);
 
   return (
     <StyledLayout>
       <ChartTitle category="s1">{chartTitle}</ChartTitle>
       <ChartContainer>
-        <AreaChart
-          style={{ height: 200 }}
-          data={chartData}
-          yAccessor={({ item }) => item.weight}
-          xAccessor={({ item }) => item.week}
-          contentInset={{ top: 70, bottom: 0 }}
-          curve={shape.curveNatural}
-          svg={{ fill: "url(#gradient)" }}
-          showGrid={false}
-          xMin={1 - 0.5}
-          xMax={7 + 0.5}
-          animate={true}
-          animationDuration={300}
-        >
-          <Gradient />
-          <Line />
-          <ChartPoints />
-          <ChartTooltips />
-        </AreaChart>
+        <Svg width={"100%"} height={"100%"}>
+          <G y={graphHeight}>
+            {data.map((item) => (
+              <Rect
+                key={item.id}
+                x={x(item.week) - GRAPH_BAR_WIDTH / 2}
+                y={y(item.weight) * -1}
+                rx={2.5}
+                width={GRAPH_BAR_WIDTH}
+                height={y(item.weight)}
+                fill={BACKGROUND_COLOR_HEX}
+              />
+            ))}
+          </G>
+        </Svg>
       </ChartContainer>
     </StyledLayout>
   );

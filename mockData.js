@@ -1,13 +1,6 @@
 export const data = {
   emptyData: [
     {
-      id: 0,
-      weight: 0,
-      date: null,
-      week: 0,
-      type: null,
-    },
-    {
       id: 1,
       weight: 0,
       date: null,
@@ -46,13 +39,6 @@ export const data = {
       weight: 0,
       date: null,
       week: 6,
-      type: null,
-    },
-    {
-      id: 7,
-      weight: 0,
-      date: null,
-      week: 7,
       type: null,
     },
   ],
@@ -105,13 +91,6 @@ export const data = {
   ],
   benchPress: [
     {
-      id: 0,
-      weight: 0,
-      date: null,
-      week: 0,
-      type: "filler",
-    },
-    {
       id: 1,
       weight: 135,
       date: "2020-05-05",
@@ -160,22 +139,8 @@ export const data = {
       week: 7,
       type: "benchPress",
     },
-    {
-      id: 8,
-      weight: 225,
-      date: null,
-      week: 8,
-      type: "filler",
-    },
   ],
   deadlift: [
-    {
-      id: 0,
-      weight: 0,
-      date: null,
-      week: 0,
-      type: "filler",
-    },
     {
       id: 1,
       weight: 225,
@@ -225,22 +190,8 @@ export const data = {
       week: 7,
       type: "deadlift",
     },
-    {
-      id: 8,
-      weight: 335,
-      date: null,
-      week: 8,
-      type: "filler",
-    },
   ],
   overheadPress: [
-    {
-      id: 0,
-      weight: 0,
-      date: null,
-      week: 0,
-      type: "filler",
-    },
     {
       id: 1,
       weight: 95,
@@ -290,22 +241,8 @@ export const data = {
       week: 7,
       type: "overheadPress",
     },
-    {
-      id: 8,
-      weight: 135,
-      date: null,
-      week: 8,
-      type: "filler",
-    },
   ],
   squat: [
-    {
-      id: 0,
-      weight: 0,
-      date: null,
-      week: 0,
-      type: "filler",
-    },
     {
       id: 1,
       weight: 225,
@@ -354,13 +291,6 @@ export const data = {
       date: "2020-06-05",
       week: 7,
       type: "squat",
-    },
-    {
-      id: 8,
-      weight: 325,
-      date: null,
-      week: 8,
-      type: "filler",
     },
   ],
 };
