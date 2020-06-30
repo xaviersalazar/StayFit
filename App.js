@@ -11,7 +11,7 @@ import {
 } from "@ui-kitten/components";
 import { default as theme } from "./custom-theme.json";
 import { FeatherIconsPack } from "./feather-icons";
-import { NavigationView } from "./components/navigation/NavigationView";
+import { Main } from "./components/Main";
 import { BACKGROUND_COLOR_HEX } from "./constants";
 import styled from "styled-components";
 
@@ -31,7 +31,7 @@ export default () => (
     <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
       <Container level="2">
-        <NavigationView />
+        <Main />
       </Container>
     </ApplicationProvider>
   </Provider>
