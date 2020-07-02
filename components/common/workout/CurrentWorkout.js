@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Layout, Text, Button, Icon } from "@ui-kitten/components";
 import { Title } from "../Title";
@@ -8,10 +9,9 @@ import {
   TEXT_COLOR_HINT_HEX,
   TEXT_COLOR_HEX,
 } from "../../../constants";
-import styled from "styled-components";
 import { Row } from "../Row";
 import { Column } from "../Column";
-import { View, Dimensions } from "react-native";
+import styled from "styled-components";
 
 const PauseIcon = (props) => (
   <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="pause" />
@@ -90,7 +90,7 @@ const SetProgressContainer = styled(Layout)`
   bottom: 64px;
   align-items: center;
   height: auto;
-  width: ${Dimensions.get("window").width}px
+  width: ${Dimensions.get("window").width}px;
   padding: 0 16px;
   background: transparent;
 `;

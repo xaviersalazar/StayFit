@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import {
   PRIMARY_COLOR_HEX,
