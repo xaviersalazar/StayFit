@@ -5,12 +5,12 @@ import {
   BACKGROUND_COLOR_HEX,
   TEXT_COLOR_HINT_HEX,
   PRIMARY_COLOR_RGBA_06,
-} from "../../../constants";
-import { Title } from "../Title";
-import { Row } from "../Row";
-import { Column } from "../Column";
+} from "../../constants";
+import { Title } from "../common/Title";
+import { Row } from "../common/Row";
+import { Column } from "../common/Column";
 import { Layout, Button, Tab, TabBar, Text, Icon } from "@ui-kitten/components";
-import { data } from "../../../mockData";
+import { data } from "../../mockData";
 import { WorkoutSets } from "./WorkoutSets";
 import { CurrentWorkout } from "./CurrentWorkout";
 import styled from "styled-components";

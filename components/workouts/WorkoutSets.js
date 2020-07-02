@@ -1,8 +1,8 @@
 import React from "react";
-import { Row } from "../Row";
-import { Column } from "../Column";
+import { Row } from "../common/Row";
+import { Column } from "../common/Column";
 import { Text, Icon } from "@ui-kitten/components";
-import { TEXT_COLOR_HINT_HEX } from "../../../constants";
+import { TEXT_COLOR_HINT_HEX } from "../../constants";
 import styled from "styled-components";
 
 const SetRow = styled(Row)`

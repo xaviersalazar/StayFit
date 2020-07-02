@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { View, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Layout, Text, Button, Icon } from "@ui-kitten/components";
-import { Title } from "../Title";
+import { Title } from "../common/Title";
 import {
   PRIMARY_COLOR_HEX,
   BACKGROUND_COLOR_HEX,
   TEXT_COLOR_HINT_HEX,
   TEXT_COLOR_HEX,
-} from "../../../constants";
-import { Row } from "../Row";
-import { Column } from "../Column";
+} from "../../constants";
+import { Row } from "../common/Row";
+import { Column } from "../common/Column";
 import styled from "styled-components";
 
 const PauseIcon = (props) => (
