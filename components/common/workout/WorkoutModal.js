@@ -32,7 +32,6 @@ const WorkoutModalLayout = styled(Layout)`
 
 const TopContainer = styled(Layout)`
   background: ${PRIMARY_COLOR_HEX};
-  box-shadow: 0 4px 12px ${PRIMARY_COLOR_RGBA_06};
   height: 30%;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;

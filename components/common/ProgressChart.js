@@ -14,7 +14,6 @@ const StyledLayout = styled(Layout)`
   background: ${PRIMARY_COLOR_HEX};
   border-radius: 20px;
   border: 0;
-  box-shadow: 0 28px 12px ${PRIMARY_COLOR_RGBA_06};
   margin: 0 0 64px 0;
 `;
 

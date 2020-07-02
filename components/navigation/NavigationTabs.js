@@ -28,10 +28,6 @@ const StyledBottomNavigation = styled(BottomNavigation)`
 
 const StyledBottomNavigationTab = styled(BottomNavigationTab)`
   border-radius: 50px;
-  box-shadow: ${(props) =>
-    props.isSelected
-      ? "0 2px 5px " + PRIMARY_COLOR_RGBA_04
-      : "0 0 0 rgba(0, 0, 0, 0)"};
   background: ${(props) => (props.isSelected ? PRIMARY_COLOR_HEX : "#ffffff")};
   margin: 0px 32px;
 `;
