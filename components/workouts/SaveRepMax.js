@@ -76,10 +76,10 @@ export const SaveRepMax = ({ isSaveRepMaxVisible, setIsSaveRepMaxVisible }) => {
   return (
     <SaveRepsModal
       isVisible={isSaveRepMaxVisible}
-      animationIn={"slideInUp"}
-      animationOut={"slideOutDown"}
-      animationInTiming={500}
-      animationOutTiming={500}
+      animationIn={"bounceInUp"}
+      animationOut={"bounceOutDown"}
+      animationInTiming={750}
+      animationOutTiming={750}
     >
       <RepsCompletedLayout>
         <Row style={{ paddingLeft: 16, paddingRight: 24 }}>

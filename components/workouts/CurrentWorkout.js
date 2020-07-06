@@ -19,7 +19,11 @@ const PauseIcon = (props) => (
   <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="pause" />
 );
 
-const CustomButton = styled(Button)`
+const PlayIcon = (props) => (
+  <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="play" />
+);
+
+const PauseButton = styled(Button)`
   height: 45px;
   width: 45px;
   border-radius: 15px;
@@ -117,22 +121,57 @@ const SetProgress = styled(View)`
   border-radius: 25px;
 `;
 
+const formatNumber = (number) => `0${number}`.slice(-2);
+
+const getTime = (time) => {
+  const mins = Math.floor(time / 60);
+  const secs = time - mins * 60;
+  return { mins: formatNumber(mins), secs: formatNumber(secs) };
+};
+
 export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
   const [currentSet, setCurrentSet] = useState(0);
   const [isSaveRepMaxVisible, setIsSaveRepMaxVisible] = useState(false);
+  const [secsRemaining, setSecsRemaining] = useState(0);
+  const [isTimeRunning, setIsTimeRunning] = useState(true);
+  const { mins, secs } = getTime(secsRemaining);
 
   useEffect(() => {
-    setCurrentSet(data.setData[0]);
-  }, []);
+    if (currentSet === 0) {
+      setCurrentSet(data.setData[0]);
+    }
+
+    let interval = null;
+    if (isTimeRunning) {
+      interval = setInterval(() => {
+        setSecsRemaining((secsRemaining) => secsRemaining + 1);
+      }, 1000);
+    } else if (!isTimeRunning && secsRemaining !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isTimeRunning, secsRemaining]);
+
+  const toggle = () => {
+    setIsTimeRunning(!isTimeRunning);
+  };
 
   const setNextSet = () => {
     const index = data.setData.indexOf(currentSet);
     const nextIndex = (index + 1) % data.setData.length;
+
     setCurrentSet(data.setData[nextIndex]);
 
     if (currentSet.reps === "1+") {
       setIsSaveRepMaxVisible(true);
     }
+  };
+
+  const finishedWorkout = () => {
+    setCurrentSet(0);
+    setSecsRemaining(0);
+    setIsTimeRunning(false);
+    setIsVisible(false);
   };
 
   return (
@@ -151,13 +190,13 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
               TIME
             </TimeSubtitle>
             <TimeTitle category="h1" inverted={true}>
-              05:25
+              {`${mins}:${secs}`}
             </TimeTitle>
             <PauseButtonContainer>
-              <CustomButton
+              <PauseButton
                 appearance="ghost"
-                accessoryLeft={PauseIcon}
-                onPress={() => setIsVisible(false)}
+                accessoryLeft={isTimeRunning ? PauseIcon : PlayIcon}
+                onPress={toggle}
               />
             </PauseButtonContainer>
           </Time>
@@ -199,9 +238,23 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
             </Column>
           </Row>
           <NextButtonContainer>
-            <NextButton size="giant" onPress={setNextSet}>
-              Next Set
-            </NextButton>
+            {data.setData.indexOf(currentSet) === data.setData.length - 1 ? (
+              <NextButton
+                size="giant"
+                onPress={finishedWorkout}
+                disabled={!isTimeRunning}
+              >
+                Finished
+              </NextButton>
+            ) : (
+              <NextButton
+                size="giant"
+                onPress={setNextSet}
+                disabled={!isTimeRunning}
+              >
+                Next Set
+              </NextButton>
+            )}
           </NextButtonContainer>
           <SetProgressContainer>
             <Row>
