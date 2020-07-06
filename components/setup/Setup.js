@@ -33,8 +33,7 @@ const ExerciseText = styled(Text)`
 const ExerciseInput = styled(Input)`
   border-radius: 25px;
   background: #f2f4f7;
-  border: 0;
-  border-color: transparent;
+  border-color: ${(props) => (props.focused ? "#fb3c51" : "transparent")};
 `;
 
 const DoneButtonContainer = styled(Layout)`
@@ -61,6 +60,7 @@ export const Setup = () => {
   const [squat, setSquat] = useState("");
   const [deadlift, setDeadlift] = useState("");
   const [overheadPress, setOverheadPress] = useState("");
+  const [isFocused, setIsFocused] = useState("");
 
   const appendLbsToInput = (exercise) => {
     if (exercise === "benchPress" && benchPress !== "") {
@@ -78,31 +78,34 @@ export const Setup = () => {
     if (exercise === "overheadPress" && overheadPress !== "") {
       setOverheadPress(overheadPress + " lbs");
     }
+
+    setIsFocused("");
   };
 
   const removeLbsFromInput = (exercise) => {
     if (exercise === "benchPress") {
       setBenchPress(benchPress.split(" ")[0]);
+      setIsFocused("benchPress");
     }
 
     if (exercise === "squat") {
       setSquat(squat.split(" ")[0]);
+      setIsFocused("squat");
     }
 
     if (exercise === "deadlift") {
       setDeadlift(deadlift.split(" ")[0]);
+      setIsFocused("deadlift");
     }
 
     if (exercise === "overheadPress") {
       setOverheadPress(overheadPress.split(" ")[0]);
+      setIsFocused("overheadPress");
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={"padding"} style={{ flex: 1 }}>
       <ScrollView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <Container style={{ height: Dimensions.get("window").height }}>
@@ -117,49 +120,53 @@ export const Setup = () => {
               <Exercise>
                 <ExerciseText category="h4">Bench Press</ExerciseText>
                 <ExerciseInput
-                  size="large"
                   placeholder="Ex: 225"
+                  size="large"
                   keyboardType="number-pad"
                   value={benchPress}
                   onChangeText={(nextValue) => setBenchPress(nextValue)}
                   onBlur={() => appendLbsToInput("benchPress")}
                   onFocus={() => removeLbsFromInput("benchPress")}
+                  focused={isFocused === "benchPress" ? true : false}
                 />
               </Exercise>
               <Exercise>
                 <ExerciseText category="h4">Squat</ExerciseText>
                 <ExerciseInput
-                  size="large"
                   placeholder="Ex: 315"
+                  size="large"
                   keyboardType="number-pad"
                   value={squat}
                   onChangeText={(nextValue) => setSquat(nextValue)}
                   onBlur={() => appendLbsToInput("squat")}
                   onFocus={() => removeLbsFromInput("squat")}
+                  focused={isFocused === "squat" ? true : false}
                 />
               </Exercise>
               <Exercise>
                 <ExerciseText category="h4">Deadlift</ExerciseText>
                 <ExerciseInput
-                  size="large"
                   placeholder="Ex: 405"
+                  size="large"
                   keyboardType="number-pad"
                   value={deadlift}
                   onChangeText={(nextValue) => setDeadlift(nextValue)}
                   onBlur={() => appendLbsToInput("deadlift")}
                   onFocus={() => removeLbsFromInput("deadlift")}
+                  focused={isFocused === "deadlift" ? true : false}
                 />
               </Exercise>
               <Exercise>
                 <ExerciseText category="h4">Overhead Press</ExerciseText>
                 <ExerciseInput
-                  size="large"
                   placeholder="Ex: 135"
+                  size="large"
                   keyboardType="number-pad"
                   value={overheadPress}
                   onChangeText={(nextValue) => setOverheadPress(nextValue)}
                   onBlur={() => appendLbsToInput("overheadPress")}
                   onFocus={() => removeLbsFromInput("overheadPress")}
+                  focused={isFocused === "overheadPress" ? true : false}
                 />
               </Exercise>
             </ExerciseContainer>
