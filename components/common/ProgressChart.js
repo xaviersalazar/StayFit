@@ -2,10 +2,10 @@ import React from "react";
 import { Layout, Text as UiKittenText } from "@ui-kitten/components";
 import {
   PRIMARY_COLOR_HEX,
-  PRIMARY_COLOR_RGBA_06,
+  PRIMARY_COLOR_RGBA_04,
   BACKGROUND_COLOR_HEX,
 } from "../../constants";
-import { Svg, G, Line, Rect, Text } from "react-native-svg";
+import { Svg, G, Rect } from "react-native-svg";
 import * as d3 from "d3";
 import styled from "styled-components";
 
@@ -30,7 +30,7 @@ const ChartContainer = styled(Layout)`
   border-bottom-right-radius: 20px;
 `;
 
-export const ProgressChart = ({ chartTitle, emptyData, data }) => {
+export const ProgressChart = ({ chartTitle, data }) => {
   const GRAPH_MARGIN = 20;
   const GRAPH_BAR_WIDTH = 5;
   const SVGHeight = 200;

@@ -4,7 +4,7 @@ import { TEXT_COLOR_HEX } from "../../constants";
 import styled from "styled-components";
 
 const StyledText = styled(Text)`
-  font-size: 48px;
+  font-size: 64px;
   color: ${(props) => (props.inverted ? "#ffffff" : TEXT_COLOR_HEX)};
 `;
 

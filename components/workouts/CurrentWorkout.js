@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Layout, Text, Button, Icon } from "@ui-kitten/components";
@@ -11,18 +11,12 @@ import {
 } from "../../constants";
 import { Row } from "../common/Row";
 import { Column } from "../common/Column";
+import { SaveRepMax } from "./SaveRepMax";
+import { data } from "../../mockData";
 import styled from "styled-components";
 
 const PauseIcon = (props) => (
   <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="pause" />
-);
-
-const PlusIcon = (props) => (
-  <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="plus" />
-);
-
-const MinusIcon = (props) => (
-  <Icon {...props} style={{ color: "#8f9bb3", fontSize: 18 }} name="minus" />
 );
 
 const CustomButton = styled(Button)`
@@ -82,7 +76,7 @@ const PauseButtonContainer = styled(Layout)`
 
 const CurrentWorkoutTitle = styled(Title)`
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 18px;
 `;
 
 const SetProgressContainer = styled(Layout)`
@@ -97,47 +91,6 @@ const SetProgressContainer = styled(Layout)`
 
 const SetDetailsText = styled(Text)`
   text-align: center;
-`;
-
-const RepsCompletedLayout = styled(Layout)`
-  background: ${BACKGROUND_COLOR_HEX};
-`;
-
-const CompletedRepsText = styled(Text)`
-  text-align: center;
-  margin-top: 52px;
-`;
-
-const CompletedRepsRow = styled(Row)`
-  margin-top: 16px;
-`;
-
-const CompletedRepsQuantityText = styled(Text)`
-  text-align: center;
-  padding-top: 8px;
-`;
-
-const AddButton = styled(CustomButton)`
-  align-self: flex-end;
-`;
-
-const MinusButton = styled(CustomButton)`
-  align-self: flex-start;
-`;
-
-const SaveButtonContainer = styled(Layout)`
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: ${BACKGROUND_COLOR_HEX};
-  height: 75px;
-`;
-
-const SaveButton = styled(Button)`
-  position: relative;
-  bottom: 12px;
-  width: 60%;
-  border-radius: 50px;
 `;
 
 const NextButtonContainer = styled(Layout)`
@@ -165,7 +118,22 @@ const SetProgress = styled(View)`
 `;
 
 export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
-  const [repsCompleted, setRepsCompleted] = useState(0);
+  const [currentSet, setCurrentSet] = useState(0);
+  const [isSaveRepMaxVisible, setIsSaveRepMaxVisible] = useState(false);
+
+  useEffect(() => {
+    setCurrentSet(data.setData[0]);
+  }, []);
+
+  const setNextSet = () => {
+    const index = data.setData.indexOf(currentSet);
+    const nextIndex = (index + 1) % data.setData.length;
+    setCurrentSet(data.setData[nextIndex]);
+
+    if (currentSet.reps === "1+") {
+      setIsSaveRepMaxVisible(true);
+    }
+  };
 
   return (
     <Modal
@@ -196,9 +164,9 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
         </TopContainer>
         <BottomContainer>
           <CurrentWorkoutTitle category="h1">Bench Press</CurrentWorkoutTitle>
-          <Row style={{ paddingLeft: 16, paddingRight: 16 }}>
+          <Row style={{ paddingLeft: 32, paddingRight: 32, marginTop: 48 }}>
             <Column col={6}>
-              <SetDetailsText category="h1">245</SetDetailsText>
+              <SetDetailsText category="h1">{currentSet.lbs}</SetDetailsText>
               <Text
                 category="c1"
                 appearance="hint"
@@ -213,13 +181,14 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
                   height: 16,
                   textAlign: "center",
                   marginTop: 12,
+                  marginLeft: 8,
                   color: TEXT_COLOR_HINT_HEX,
                 }}
                 name="x"
               />
             </Column>
             <Column col={6}>
-              <SetDetailsText category="h1">1+</SetDetailsText>
+              <SetDetailsText category="h1">{currentSet.reps}</SetDetailsText>
               <Text
                 category="c1"
                 appearance="hint"
@@ -229,54 +198,19 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
               </Text>
             </Column>
           </Row>
-          <RepsCompletedLayout>
-            <Row style={{ paddingLeft: 16, paddingRight: 24 }}>
-              <Column>
-                <CompletedRepsText category="c1" appearance="hint">
-                  How many reps did you complete?
-                </CompletedRepsText>
-              </Column>
-            </Row>
-            <CompletedRepsRow style={{ paddingLeft: 16, paddingRight: 24 }}>
-              <Column>
-                <AddButton
-                  appearance="ghost"
-                  accessoryLeft={PlusIcon}
-                  onPress={() => setRepsCompleted(repsCompleted + 1)}
-                />
-              </Column>
-              <Column>
-                <CompletedRepsQuantityText category="h4">
-                  {repsCompleted}
-                </CompletedRepsQuantityText>
-              </Column>
-              <Column>
-                <MinusButton
-                  appearance="ghost"
-                  accessoryLeft={MinusIcon}
-                  onPress={() =>
-                    setRepsCompleted(
-                      repsCompleted > 0 ? repsCompleted - 1 : repsCompleted
-                    )
-                  }
-                />
-              </Column>
-            </CompletedRepsRow>
-            <SaveButtonContainer>
-              <SaveButton size="small" status="success">
-                Save
-              </SaveButton>
-            </SaveButtonContainer>
-          </RepsCompletedLayout>
           <NextButtonContainer>
-            <NextButton size="giant">Next</NextButton>
+            <NextButton size="giant" onPress={setNextSet}>
+              Next Set
+            </NextButton>
           </NextButtonContainer>
           <SetProgressContainer>
             <Row>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
+              {data.setData.map((value) => {
                 return (
-                  <Column key={i}>
-                    <SetProgress done={i <= 3 ? true : false} />
+                  <Column key={value.set}>
+                    <SetProgress
+                      done={value.set <= currentSet.set ? true : false}
+                    />
                   </Column>
                 );
               })}
@@ -284,6 +218,10 @@ export const CurrentWorkout = ({ isVisible, setIsVisible }) => {
           </SetProgressContainer>
         </BottomContainer>
       </CurrentWorkoutLayout>
+      <SaveRepMax
+        isSaveRepMaxVisible={isSaveRepMaxVisible}
+        setIsSaveRepMaxVisible={setIsSaveRepMaxVisible}
+      />
     </Modal>
   );
 };

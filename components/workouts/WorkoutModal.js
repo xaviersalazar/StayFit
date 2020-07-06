@@ -63,7 +63,7 @@ const BackButton = styled(Button)`
 
 const WorkoutsTabsContainer = styled(Layout)`
   position: relative;
-  top: 18px;
+  top: 0;
   background: ${BACKGROUND_COLOR_HEX};
   border-radius: 35px;
   padding: 4px;
