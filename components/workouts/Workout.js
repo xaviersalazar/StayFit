@@ -24,7 +24,7 @@ export const Workout = ({ image, workoutTitle, workoutSubtitle }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <>
+    <React.Fragment>
       <TouchableOpacity onPress={() => setIsVisible(true)}>
         <WorkoutContainer image={image}>
           <WorkoutTitle category="h1">{workoutTitle}</WorkoutTitle>
@@ -45,6 +45,6 @@ export const Workout = ({ image, workoutTitle, workoutSubtitle }) => {
         workoutTitle={workoutTitle}
         workoutSubtitle={workoutSubtitle}
       />
-    </>
+    </React.Fragment>
   );
 };

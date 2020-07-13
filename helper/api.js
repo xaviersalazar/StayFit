@@ -3,21 +3,32 @@ import AsyncStorage from "@react-native-community/async-storage";
 const save = async (storageKey, value) => {
   try {
     await AsyncStorage.setItem(storageKey, JSON.stringify(value));
-    console.log("Data successfully saved");
+    console.log(`${storageKey} data: ${value} successfully saved`);
   } catch (e) {
     console.log(`Failed to save ${value} into ${storageKey}`);
   }
 };
 
-const read = async (storageKey) => {
+const get = async (storageKey) => {
   try {
-    const value = await AsyncStorage.getItem(JSON.parse(storageKey));
+    const value = await AsyncStorage.getItem(storageKey);
 
-    if (value !== null) {
-      // Do something with previously stored value
+    console.log(`Get result for ${storageKey}: ${value}`);
+    if (value != null) {
+      return JSON.parse(value);
+    } else {
+      return null;
     }
   } catch (e) {
-    console.log(`Failed to read data from ${storageKey}`);
+    console.log(`Failed to get data from ${storageKey}`);
+  }
+};
+
+const remove = async (storageKey) => {
+  try {
+    await AsyncStorage.removeItem(storageKey);
+  } catch (e) {
+    console.log(`Failed to remove ${storageKey}`);
   }
 };
 
@@ -32,7 +43,8 @@ const clearStorage = async () => {
 
 const api = {
   save,
-  read,
+  get,
+  remove,
   clearStorage,
 };
 

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import allActions from "../../redux/actions";
+import { saveIsFinishedSetup } from "../../redux/actions/setupActions";
 import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  Platform,
   Keyboard,
   ScrollView,
   View,
@@ -16,6 +15,7 @@ import { Title } from "../common/Title";
 import { Subtitle } from "../common/Subtitle";
 import { BACKGROUND_COLOR_HEX } from "../../constants";
 import styled from "styled-components";
+import api from "../../helper/api";
 
 const ExerciseContainer = styled(Layout)`
   margin-top: 32px;
@@ -62,6 +62,10 @@ export const Setup = () => {
   const [overheadPress, setOverheadPress] = useState("");
   const [isFocused, setIsFocused] = useState("");
 
+  useEffect(() => {
+    api.get("isFinishedSetup");
+  }, []);
+
   const appendLbsToInput = (exercise) => {
     if (exercise === "benchPress" && benchPress !== "") {
       setBenchPress(benchPress + " lbs");
@@ -102,6 +106,10 @@ export const Setup = () => {
       setOverheadPress(overheadPress.split(" ")[0]);
       setIsFocused("overheadPress");
     }
+  };
+
+  const saveData = () => {
+    dispatch(saveIsFinishedSetup(true));
   };
 
   return (
@@ -171,12 +179,7 @@ export const Setup = () => {
               </Exercise>
             </ExerciseContainer>
             <DoneButtonContainer>
-              <DoneButton
-                size="giant"
-                onPress={() =>
-                  dispatch(allActions.setupActions.isFinishedSetup(true))
-                }
-              >
+              <DoneButton size="giant" onPress={saveData}>
                 Done
               </DoneButton>
             </DoneButtonContainer>

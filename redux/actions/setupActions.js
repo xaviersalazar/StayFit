@@ -1,9 +1,16 @@
 import { IS_FINISHED_SETUP } from "../actionTypes";
+import api from "../../helper/api";
 
-const isFinishedSetup = (isFinishedSetup) => {
+export const saveIsFinishedSetup = (value) => (dispatch) => {
+  return api
+    .save("isFinishedSetup", value)
+    .then(dispatch(isFinishedSetup(value)));
+};
+
+const isFinishedSetup = (value) => {
   return {
     type: IS_FINISHED_SETUP,
-    payload: isFinishedSetup,
+    payload: value,
   };
 };
 

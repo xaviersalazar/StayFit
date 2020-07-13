@@ -21,9 +21,9 @@ export const NavigationView = () => {
   );
 
   return (
-    <>
+    <React.Fragment>
       {renderSelectedTabView(selectedIndex)}
       <NavigationTabs />
-    </>
+    </React.Fragment>
   );
 };
