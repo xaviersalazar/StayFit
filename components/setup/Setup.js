@@ -16,6 +16,7 @@ import { Subtitle } from "../common/Subtitle";
 import { BACKGROUND_COLOR_HEX } from "../../constants";
 import styled from "styled-components";
 import api from "../../helper/api";
+import OneRepMax from "../../classes/OneRepMax";
 
 const ExerciseContainer = styled(Layout)`
   margin-top: 24px;
