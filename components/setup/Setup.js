@@ -18,7 +18,7 @@ import styled from "styled-components";
 import api from "../../helper/api";
 
 const ExerciseContainer = styled(Layout)`
-  margin-top: 32px;
+  margin-top: 24px;
   background: transparent;
 `;
 
