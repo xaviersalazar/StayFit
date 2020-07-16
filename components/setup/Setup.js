@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { saveIsFinishedSetup } from "../../redux/actions/setupActions";
+import { saveInitialData } from "../../redux/actions/setupActions";
 import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
@@ -14,9 +14,9 @@ import { Container } from "../common/Container";
 import { Title } from "../common/Title";
 import { Subtitle } from "../common/Subtitle";
 import { BACKGROUND_COLOR_HEX } from "../../constants";
-import styled from "styled-components";
 import api from "../../helper/api";
 import OneRepMax from "../../classes/OneRepMax";
+import styled from "styled-components";
 
 const ExerciseContainer = styled(Layout)`
   margin-top: 24px;
@@ -64,7 +64,8 @@ export const Setup = () => {
   const [isFocused, setIsFocused] = useState("");
 
   useEffect(() => {
-    api.get("isFinishedSetup");
+    // DEV purposes only
+    api.clearStorage();
   }, []);
 
   const appendLbsToInput = (exercise) => {
@@ -110,7 +111,22 @@ export const Setup = () => {
   };
 
   const saveData = () => {
-    dispatch(saveIsFinishedSetup(true));
+    const oneRepMaxes = [
+      new OneRepMax(
+        "benchPress",
+        "Bench Press",
+        Number(benchPress.split(" ")[0])
+      ),
+      new OneRepMax("squat", "Squat", Number(squat.split(" ")[0])),
+      new OneRepMax("deadlift", "Deadlift", Number(deadlift.split(" ")[0])),
+      new OneRepMax(
+        "overheadPress",
+        "Overhead Press",
+        Number(overheadPress.split(" ")[0])
+      ),
+    ];
+
+    dispatch(saveInitialData(oneRepMaxes));
   };
 
   return (
